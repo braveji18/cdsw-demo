@@ -3,14 +3,34 @@ CDSW 예제에 대한 설명
 
 
 
+## 프로젝트 생성 - Git
+
+https://github.com/cloudera/cdsw-training.git
+
+
+
+## 프로젝트 생성 - 빈프로젝트
+
+- 프로젝트 생성후에 session을 실행
+- 명령창에서 git clone  https://github.com/braveji18/cdsw-demo.git
+
+
+
 ## R 예제
 
 - impala 연동
 - impala에서 데이터를 읽어와서 시각화
 
-wget -nc https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/MASS/Cars93.csv
+
 
 ```
+# 로컬 PC에 데이터 다운로드
+wget -nc https://raw.github.com/vincentarelbundock/Rdatasets/master/csv/MASS/Cars93.csv
+
+# Cars93.csv 파일을 열어서 첫번째 라인이 헤더를 삭제
+# 따음표( " ) 모두 삭제
+
+# HUE에서 생성
 CREATE EXTERNAL TABLE  Cars93  (  
 NO     INT,
 Manufacturer  STRING, 
@@ -45,6 +65,8 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 STORED AS TEXTFILE;
+
+# HUE에서 하둡 HDFS
 
 LOAD DATA INPATH '/tmp/Cars93.csv' OVERWRITE INTO TABLE default.Cars93 ;
 
@@ -91,7 +113,7 @@ qplot(cars$wheelbase, cars$weight,
 
 
 
-- Jobs 메뉴에서 job 파이프라인 실행
+- Jobs 메뉴에서 job 파이프라인 실행 - analysis.r
 
 
 
@@ -167,9 +189,17 @@ def predict(args):
 
 - Name : iris_model
 - Description : iris_model
+- Input :  {    "petal_length":  10  }
+- output :   {    "result": "11.54" }
+- Model API key
 
-- Input :  {    "petal_length": 10 }
-- output :   {    "result": 2 }
+```
+ccbb48c8583d6485e0a8430625060180a98bb97ca655b73d346370d28a98be86.0aa45656aee87f2484e8556197529152b08a402f3ab91c62f13f2a944f5b4c39
+
+e136f4774b31ba932dce665e4f9bb08061a19ecc8b56856eb6b6a35e4f8f0624.25a5f6b877209b75750e8f60ce81e68ca18785a46e628e25970dff03f890ed24
+```
+
+
 
 
 
@@ -177,7 +207,7 @@ def predict(args):
 
 
 
-
+CDSW내에 있는 pyspark 예저 활용 - 
 
 
 
